@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DoctorRepository extends CrudRepository<Doctor, Long> {
     Doctor findByEmail(String email);
-    Doctor findByEmailAndPassWord(String email, String password);
+    Doctor findByEmailAndPassword(String email, String password);
 }

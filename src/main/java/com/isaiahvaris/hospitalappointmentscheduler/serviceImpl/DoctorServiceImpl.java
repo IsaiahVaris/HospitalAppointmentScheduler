@@ -28,7 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor getDoctorByEmailandPassWord(String email, String password) {
-        return doctorRepository.findByEmailAndPassWord(email, password);
+        return doctorRepository.findByEmailAndPassword(email, password);
     }
 
     @Override

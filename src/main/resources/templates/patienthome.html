@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patient | Home Up</title>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+</head>
+<body style="background-color: aliceblue">
+
+
+<nav>
+    <div class="nav-wrapper" style="background-color: darkblue">
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+<!--                <li><a th:href="@{/login/patient}" style="font-size: larger"><b>Patient</b></a></li>-->
+                <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top: 5rem">
+    <h4 th:text="'Welcome ' + ${patient.firstName} + ' '+ ${patient.lastName} + '!'"></h4>
+    <hr />
+    <div th:if="${requestsuccessful != null}">
+        <p th:text="${requestsuccessful}"></p>
+    </div>
+
+
+    <div class="row">
+        <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/new}">
+            <div class="row">
+                <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Request New Appointment
+                    <i class="material-icons right"></i>
+                </button>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <hr />
+    <div class="row">
+        <a th:href="@{/appointment/pending}">
+            <button class="btn waves-effect waves-light blue-violet accent-3"> View Pending Appointments
+                <i class="material-icons right"></i>
+            </button>
+        </a>
+        <a th:href="@{/appointment/accepted}">
+            <button class="btn waves-effect waves-light blue-violet accent-3">View Accepted Appointments
+                <i class="material-icons right"></i>
+            </button>
+        </a>
+        <a th:href="@{/appointment/completed}">
+            <button class="btn waves-effect waves-light blue-violet accent-3">View Completed Appointments
+                <i class="material-icons right"></i>
+            </button>
+        </a>
+        <a th:href="@{/appointment/cancelled}">
+            <button class="btn waves-effect waves-light blue-violet accent-3" th:href="@{/appointment/cancelled}">View Cancelled Appointments
+                <i class="material-icons right"></i>
+            </button>
+        </a>
+    </div>
+</div>
+
+<div class="container">
+
+
+</div>
+<div class="container" style="margin-top: 5rem">
+    <table >
+        <h5 th:text="${status.toUpperCase()} + ' Appointment Requests'"></h5>
+        <hr />
+
+        <thead>
+        <tr>
+            <th>Appointment Id</th>
+            <th>Status</th>
+            <th th:if="${status.equals('accepted') || status.equals('completed')}">
+                Doctor
+            </th>
+            <th th:if="${status.equals('accepted') || status.equals('completed')}">
+                Date
+            </th>
+            <th>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="appointment : ${appointments}">
+            <td>
+                <p th:text="${appointment.getId()}"></p>
+            </td>
+            <td>
+                <p th:text="${appointment.getStatus()}"></p>
+            </td>
+
+
+            <td th:if="${status.equals('accepted') || status.equals('completed')}">
+                <p th:text="${appointment.getDoctor().firstName + ' ' + appointment.getDoctor().lastName}"></p>
+            </td>
+
+            <td th:if="${status.equals('accepted') || status.equals('completed')}">
+                <p th:text="${#temporals.format(appointment.getAppointmentTime(),'yyyy/MM/dd hh:mm a')}"></p>
+            </td>
+
+            <td th:if="${status.equals('accepted') || status.equals('pending')}">
+                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">
+                        <button class="btn waves-effect waves-light black" type="submit" name="action">Cancel Appointment
+                            <i class="material-icons right"></i>
+                        </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+</html>
