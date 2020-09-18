@@ -21,6 +21,10 @@ A patient should be able to:
 
 * Signup
 
+* View and edit profile
+
+* Delete account.
+
 * request an appointment.
 
 * Cancel/delete an appointment
@@ -36,13 +40,11 @@ A doctor should be able to:
 
 * Signup
 
+* View and edit profile
+
 * accept a patient's appointment request and set the appointment time.
 
 * Reschedule an appointment
-
-* Update appointment status after completion
-
-* Cancel/delete an appointment
 
 * View an appointment and it's details
 
