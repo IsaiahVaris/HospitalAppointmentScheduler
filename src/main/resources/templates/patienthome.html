@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Patient | Home Up</title>
+    <title>Patient | Home</title>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
 </head>
-<body style="background-color: aliceblue">
+<body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
 
 
 <nav>
@@ -17,7 +17,7 @@
         <div class="container">
             <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-<!--                <li><a th:href="@{/login/patient}" style="font-size: larger"><b>Patient</b></a></li>-->
+                <li><a th:href="@{/profile/}" style="font-size: larger"><b>Profile</b></a></li>
                 <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
             </ul>
         </div>
@@ -28,7 +28,7 @@
     <h4 th:text="'Welcome ' + ${patient.firstName} + ' '+ ${patient.lastName} + '!'"></h4>
     <hr />
     <div th:if="${requestsuccessful != null}">
-        <p th:text="${requestsuccessful}"></p>
+        <p th:text="${requestsuccessful}" style="color: green"></p>
     </div>
 
 
@@ -53,7 +53,7 @@
             </button>
         </a>
         <a th:href="@{/appointment/accepted}">
-            <button class="btn waves-effect waves-light blue-violet accent-3">View Accepted Appointments
+            <button class="btn waves-effect waves-light blue-violet accent-3">View Upcoming Appointments
                 <i class="material-icons right"></i>
             </button>
         </a>
@@ -117,6 +117,13 @@
                         <button class="btn waves-effect waves-light black" type="submit" name="action">Cancel Appointment
                             <i class="material-icons right"></i>
                         </button>
+                </form>
+            </td>
+            <td th:if="${status.equals('cancelled')}">
+                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/delete/{id}(id=${appointment.getId()})}">
+                    <button class="btn waves-effect waves-light black" type="submit" name="action" >Delete Appointment
+                        <i class="material-icons right"></i>
+                    </button>
                 </form>
             </td>
         </tr>

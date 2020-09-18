@@ -13,13 +13,6 @@ public class HospitalappointmentschedulerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(HospitalappointmentschedulerApplication.class, args);
-//
-        Appointment appointmentss = new Appointment();
-        appointmentss.setAppointmentTime(LocalDateTime.now());
-
-//        LocalDateTime now = 2020-09-15T22:43;
-
-        System.out.println(appointmentss.getAppointmentTime().format(DateTimeFormatter.ofPattern("dd-MM-yyyy hh:mm a")));
     }
 
 }

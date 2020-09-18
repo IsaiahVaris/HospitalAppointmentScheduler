@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -32,7 +33,10 @@ public class RegisterController {
     }
 
     @GetMapping("/doctor")
-    public String registerDoctor(Model model) {
+    public String registerDoctor(Model model, HttpSession session) {
+        Object doctorObj = session.getAttribute("doctor");
+        if(doctorObj == null)
+            return "landing";
 
         model.addAttribute("invalid", null);
         model.addAttribute("doctor", new Doctor());
@@ -57,18 +61,22 @@ public class RegisterController {
     }
 
     @PostMapping("/doctor")
-    public String signup(@Valid Doctor doctor, Model model) {
+    public String signup(@Valid Doctor doctor, Model model, HttpSession session) {
+        Object doctorObj = session.getAttribute("doctor");
+        if(doctorObj == null)
+            return "landing";
 
         Doctor gottenDoctor = doctorService.getDoctorByEmail(doctor.getEmail());
         if (gottenDoctor != null) {
             //error message if email provided is already registered
-            model.addAttribute("invalid", "Patient already exists");
+            model.addAttribute("invalid", "Doctor already exists");
             return "doctorregister";
         }
 
         doctorService.addDoctor(doctor);
         //successful registration message
         model.addAttribute("newregistration", "Registration successful!");
-        return "doctorlogin";
+        model.addAttribute("doctors", doctorService.getAllDoctors());
+        return "admin";
     }
 }

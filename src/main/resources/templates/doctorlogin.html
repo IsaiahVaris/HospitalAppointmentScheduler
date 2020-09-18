@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor Login</title>
+    <title>Doctor | Login</title>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 </head>
-<body style="background-color: aliceblue">
+<body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
 <nav>
     <div class="nav-wrapper" style="background-color: darkblue">
         <div class="container">
@@ -27,7 +27,7 @@
         <p style="color: tomato" th:text="${invalid}"></p>
     </div>
     <div th:if="${newregistration != null}">
-        <p style="color: blue" th:text="${newregistration}"></p>
+        <p style="color: green" th:text="${newregistration}"></p>
     </div>
     <hr />
     <div class="row">

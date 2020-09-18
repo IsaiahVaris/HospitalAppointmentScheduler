@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Patient | Home Up</title>
+    <title>Doctor | Home</title>
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 
 </head>
-<body style="background-color: aliceblue">
+<body style="background: linear-gradient(to bottom right, #9CA6D9, #DBE2F4) no-repeat center center fixed">
 
 
 <nav>
@@ -17,7 +17,7 @@
         <div class="container">
             <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <!--                <li><a th:href="@{/login/patient}" style="font-size: larger"><b>Patient</b></a></li>-->
+                <li><a th:href="@{/profile}" style="font-size: larger"><b>Profile</b></a></li>
                 <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
             </ul>
         </div>
@@ -28,8 +28,13 @@
     <h4 th:text="'Welcome Doctor ' + ${doctor.firstName} + '!'"></h4>
     <hr />
     <div th:if="${requestsuccessful != null}">
-        <p th:text="${requestsuccessful}"></p>
+        <p th:text="${requestsuccessful}" style="color: green"></p>
     </div>
+    <div th:if="${timeoverlap != null}">
+        <p th:text="${timeoverlap}" style="color: red"></p>
+    </div>
+
+
 
 </div>
 
@@ -41,7 +46,7 @@
             </button>
         </a>
         <a th:href="@{/appointment/accepted}">
-            <button class="btn waves-effect waves-light blue-violet accent-3">View Accepted Appointments
+            <button class="btn waves-effect waves-light blue-violet accent-3">View Upcoming Appointments
                 <i class="material-icons right"></i>
             </button>
         </a>
@@ -96,7 +101,8 @@
             </td>
             <td th:if="${status.equals('pending')}">
                 <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/set/{id}(id=${appointment.getId()})}">
-                    <input type="datetime-local" name="setdate" required>
+                    <input type="datetime-local" name="setdate" th:min="${mintime}" required>
+
                     <button class="btn waves-effect waves-light black" type="submit" name="action">Accept Appointment
                         <i class="material-icons right"></i>
                     </button>
@@ -104,16 +110,17 @@
                 </form>
             </td>
             <td th:if="${status.equals('accepted')}">
-                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">
+                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/set/{id}(id=${appointment.getId()})}">
+                    <input type="datetime-local" name="setdate" th:min="${mintime}" required>
                     <button class="btn waves-effect waves-light black" type="submit" name="action">Reschedule Appointment
                         <i class="material-icons right"></i>
                     </button>
                 </form>
-                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">
-                    <button class="btn waves-effect waves-light black" type="submit" name="action">Cancel Appointment
-                        <i class="material-icons right"></i>
-                    </button>
-                </form>
+<!--                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">-->
+<!--                    <button class="btn waves-effect waves-light black" type="submit" name="action">Mark As Completed-->
+<!--                        <i class="material-icons right"></i>-->
+<!--                    </button>-->
+<!--                </form>-->
             </td>
         </tr>
         </tbody>

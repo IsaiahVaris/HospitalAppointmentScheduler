@@ -82,6 +82,15 @@ public class LoginController {
             model.addAttribute("invalid", "Incorrect password");
             return "doctorlogin";
         }
+
+        if(gottenDoctor.getEmail().equals("admin@hospital.com")){
+            session.setAttribute("doctor", gottenDoctor);
+            model.addAttribute("doctor", new Doctor());
+            model.addAttribute("doctors", doctorService.getAllDoctors());
+            return "admin";
+        }
+
+
         session.setAttribute("doctor", gottenDoctor);
         return "redirect:/";
     }
@@ -91,6 +100,6 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        return "landing";
+        return "redirect:/";
     }
 }

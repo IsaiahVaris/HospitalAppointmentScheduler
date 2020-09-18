@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/")
@@ -41,19 +43,17 @@ public class IndexController {
             model.addAttribute("appointments", appointmentService.getAllPatientAppointmentsForStatus((Patient)patientObj, status));
             model.addAttribute("appointmentrequest", new Appointment());
 
-//            model.addAttribute("requestsuccessful", null);
-
             return "patienthome";
         }
         if (doctorObj != null) {
             String status = "pending";
 
+            model.addAttribute("mintime", LocalDateTime.now().plusMinutes(30)
+                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
             model.addAttribute("doctor", (Doctor) doctorObj);
             model.addAttribute("status", status);
             model.addAttribute("appointments", appointmentService.getAllAppointmentsForStatus(status));
             model.addAttribute("appointmentrequest", new Appointment());
-
-//            model.addAttribute("requestsuccessful", null);
 
             return "doctorhome";
         }
