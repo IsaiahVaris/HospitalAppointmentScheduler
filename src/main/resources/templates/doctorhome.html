@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor | Home</title>
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-
 </head>
 <body style="background: linear-gradient(to bottom right, #9CA6D9, #DBE2F4) no-repeat center center fixed">
-
-
 <nav>
     <div class="nav-wrapper" style="background-color: darkblue">
         <div class="container">
             <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a th:href="@{/profile}" style="font-size: larger"><b>Profile</b></a></li>
+                <li><a th:href="@{/profile/}" style="font-size: larger"><b>Profile</b></a></li>
                 <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
             </ul>
         </div>
@@ -33,9 +28,6 @@
     <div th:if="${timeoverlap != null}">
         <p th:text="${timeoverlap}" style="color: red"></p>
     </div>
-
-
-
 </div>
 
 <div class="container">
@@ -55,11 +47,6 @@
                 <i class="material-icons right"></i>
             </button>
         </a>
-        <a th:href="@{/appointment/cancelled}">
-            <button class="btn waves-effect waves-light blue-violet accent-3" th:href="@{/appointment/cancelled}">View Cancelled Appointments
-                <i class="material-icons right"></i>
-            </button>
-        </a>
     </div>
 </div>
 
@@ -73,17 +60,11 @@
         <tr>
             <th>Appointment Id</th>
             <th>Status</th>
-            <th>
-                Patient
-            </th>
-            <th th:if="${status.equals('accepted') || status.equals('completed')}">
-                Date
-            </th>
-            <th>
-            </th>
+            <th>Patient</th>
+            <th th:if="${status.equals('accepted') || status.equals('completed')}">Date</th>
+            <th></th>
         </tr>
         </thead>
-
         <tbody>
         <tr th:each="appointment : ${appointments}">
             <td>
@@ -97,7 +78,6 @@
             </td>
             <td th:if="${status.equals('accepted') || status.equals('completed')}">
                 <p th:text="${#temporals.format(appointment.getAppointmentTime(),'yyyy/MM/dd hh:mm a')}"></p>
-
             </td>
             <td th:if="${status.equals('pending')}">
                 <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/set/{id}(id=${appointment.getId()})}">
@@ -106,7 +86,6 @@
                     <button class="btn waves-effect waves-light black" type="submit" name="action">Accept Appointment
                         <i class="material-icons right"></i>
                     </button>
-<!--                    th:field="*{appointmentTime}"-->
                 </form>
             </td>
             <td th:if="${status.equals('accepted')}">
@@ -116,17 +95,10 @@
                         <i class="material-icons right"></i>
                     </button>
                 </form>
-<!--                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">-->
-<!--                    <button class="btn waves-effect waves-light black" type="submit" name="action">Mark As Completed-->
-<!--                        <i class="material-icons right"></i>-->
-<!--                    </button>-->
-<!--                </form>-->
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-
 </body>
 </html>

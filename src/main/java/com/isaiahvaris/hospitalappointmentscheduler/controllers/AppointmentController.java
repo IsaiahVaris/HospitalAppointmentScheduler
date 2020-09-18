@@ -67,7 +67,7 @@ public class AppointmentController {
                 model.addAttribute("timeoverlap",
                         "Patient has another appointment close to this time at " +
                         appt.getAppointmentTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
-                                + "Set appointment at least one hour before or after this time.");
+                                + " Set appointment at least one hour before or after this time.");
 
                 model.addAttribute("mintime", LocalDateTime.now().plusMinutes(30)
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));model.addAttribute("doctor", doctorObj);
@@ -85,7 +85,7 @@ public class AppointmentController {
                 model.addAttribute("timeoverlap",
                         "You have another appointment close to this time at " +
                                 appt.getAppointmentTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
-                        + "Set appointment at least one hour before or after this time.");
+                        + " Set appointment at least one hour before or after this time.");
                 model.addAttribute("mintime", LocalDateTime.now().plusMinutes(30)
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));model.addAttribute("doctor", doctorObj);
                 model.addAttribute("status", "pending");

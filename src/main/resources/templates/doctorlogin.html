@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor | Login</title>
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
 </head>
 <body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
 <nav>
@@ -26,7 +24,6 @@
     <div th:if="${invalid != null}">
         <p style="color: tomato" th:text="${invalid}"></p>
     </div>
-
     <hr />
     <div class="row">
         <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/login/doctor}" th:object="${doctor}">
@@ -36,7 +33,6 @@
                     <label for="email">Email</label>
                 </div>
             </div>
-
             <div class="row">
                 <div class="input-field col s12">
                     <input id="password" type="password" class="validate" th:field="*{password}" required>

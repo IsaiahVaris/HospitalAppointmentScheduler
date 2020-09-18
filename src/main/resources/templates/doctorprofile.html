@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Doctor | Profile</title>
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-
 </head>
 <body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
-
-
 <nav>
     <div class="nav-wrapper" style="background-color: darkblue">
         <div class="container">
@@ -33,10 +28,8 @@
         <p th:text="${update}" style="color: green"></p>
     </div>
     <table>
-
         <tbody>
         <th></th>
-
         <tr>
             <td>First Name:</td>
             <td th:text="${user.firstName}"></td>
@@ -52,13 +45,11 @@
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>Surname:</td>
             <td th:text="${user.lastName}"></td>
             <td>
                 <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/lastName}" th:object="${user}">
-
                     <div class="input-field col s6">
                         <input placeholder="Last Name" id="lastname" type="text" class="validate" th:field="*{lastName}" required>
                     </div>
@@ -69,7 +60,6 @@
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>Date Of Birth:</td>
             <td th:text="${user.birthDay}"></td>
@@ -86,7 +76,6 @@
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>Gender:</td>
             <td th:text="${user.gender}"></td>
@@ -109,7 +98,6 @@
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>Email Address:</td>
             <td th:text="${user.email}"></td>
@@ -126,7 +114,6 @@
                 </form>
             </td>
         </tr>
-
         <tr>
             <td>Update Password</td>
             <td>
@@ -136,8 +123,6 @@
                         <div class="input-field col s12">
                             <input id="password" type="password" class="validate" th:field="*{password}" required>
                             <label for="password">Password</label>
-<!--                            <input id="confirmpassword" type="password" class="validate" th:field="*{password}" required>-->
-<!--                            <label for="password">Re-enter Password</label>-->
                         </div>
                     </div>
 
@@ -149,7 +134,6 @@
         </tr>
     </table>
 </div>
-
 </div>
 </body>
 </html>

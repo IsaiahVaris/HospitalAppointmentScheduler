@@ -46,11 +46,18 @@ public class IndexController {
             return "patienthome";
         }
         if (doctorObj != null) {
+            Doctor gottenDoctor = (Doctor)doctorObj;
+            if(gottenDoctor.getEmail().equals("admin@hospital.com")){
+                session.setAttribute("doctor", gottenDoctor);
+                model.addAttribute("doctor", new Doctor());
+                return "admin";
+            }
+
             String status = "pending";
 
             model.addAttribute("mintime", LocalDateTime.now().plusMinutes(30)
                     .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
-            model.addAttribute("doctor", (Doctor) doctorObj);
+            model.addAttribute("doctor", gottenDoctor);
             model.addAttribute("status", status);
             model.addAttribute("appointments", appointmentService.getAllAppointmentsForStatus(status));
             model.addAttribute("appointmentrequest", new Appointment());

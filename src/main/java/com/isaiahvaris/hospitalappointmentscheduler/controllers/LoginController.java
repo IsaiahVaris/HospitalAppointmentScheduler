@@ -86,11 +86,8 @@ public class LoginController {
         if(gottenDoctor.getEmail().equals("admin@hospital.com")){
             session.setAttribute("doctor", gottenDoctor);
             model.addAttribute("doctor", new Doctor());
-            model.addAttribute("doctors", doctorService.getAllDoctors());
             return "admin";
         }
-
-
         session.setAttribute("doctor", gottenDoctor);
         return "redirect:/";
     }
