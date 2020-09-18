@@ -113,7 +113,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/delete/{id}")
-    public String deleteAppointment(HttpSession session, @Valid Appointment appointment, @PathVariable("id") long id, Model model) {
+    public String deleteAppointment(HttpSession session, @PathVariable("id") long id, Model model) {
         Object patientObj = session.getAttribute("patient");
 
         if (patientObj == null)
@@ -131,21 +131,20 @@ public class AppointmentController {
     }
 
 
-    @PostMapping("/cancel")
-    public String cancelAppointment(HttpSession session, @Valid Appointment appointment, Model model) {
+    @PostMapping("/cancel/{id}")
+    public String cancelAppointment(HttpSession session, @PathVariable("id") long id, Model model) {
         Object patientObj = session.getAttribute("patient");
 
         if (patientObj == null)
         return "landing";
 
-        appointment.setPatient((Patient) patientObj);
+        Appointment appointment = appointmentService.getAppointmentById(id);
         appointment.setStatus("cancelled");
 
         appointmentService.updateAppointment(appointment);
 
         model.addAttribute("patient", patientObj);
         model.addAttribute("status", "cancelled");
-
         model.addAttribute("appointments", appointmentService.getAllPatientAppointmentsForStatus((Patient)patientObj, "cancelled"));
         model.addAttribute("appointmentrequest", new Appointment());
         model.addAttribute("requestsuccessful", "Appointment cancelled successfully!");

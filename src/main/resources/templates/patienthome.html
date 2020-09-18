@@ -111,7 +111,7 @@
             </td>
 
             <td th:if="${status.equals('accepted') || status.equals('pending')}">
-                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel}">
+                <form class="col s12" method="post" th:object="${appointmentrequest}" th:action="@{/appointment/cancel/{id}(id=${appointment.getId()})}">
                         <button class="btn waves-effect waves-light black" type="submit" name="action">Cancel Appointment
                             <i class="material-icons right"></i>
                         </button>
