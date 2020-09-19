@@ -1,9 +1,7 @@
 package com.isaiahvaris.hospitalappointmentscheduler.controllers;
 
-import com.isaiahvaris.hospitalappointmentscheduler.models.Appointment;
 import com.isaiahvaris.hospitalappointmentscheduler.models.Doctor;
 import com.isaiahvaris.hospitalappointmentscheduler.models.Patient;
-import com.isaiahvaris.hospitalappointmentscheduler.models.User;
 import com.isaiahvaris.hospitalappointmentscheduler.service.DoctorService;
 import com.isaiahvaris.hospitalappointmentscheduler.service.PatientService;
 import org.springframework.stereotype.Controller;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/profile")
@@ -155,7 +151,11 @@ public class ProfileController {
             return "landing";
 
         patientService.deletePatient((Patient) patientObj);
-        return "redirect:/";
+        model.addAttribute("deleted", "Profile deleted Successfully");
+
+        model.addAttribute("patient", new Patient());
+
+        return "patientlogin";
     }
 
     }

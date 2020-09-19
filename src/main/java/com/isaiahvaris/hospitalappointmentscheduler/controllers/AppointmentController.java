@@ -4,7 +4,6 @@ import com.isaiahvaris.hospitalappointmentscheduler.models.Appointment;
 import com.isaiahvaris.hospitalappointmentscheduler.models.Doctor;
 import com.isaiahvaris.hospitalappointmentscheduler.models.Patient;
 import com.isaiahvaris.hospitalappointmentscheduler.service.AppointmentService;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
