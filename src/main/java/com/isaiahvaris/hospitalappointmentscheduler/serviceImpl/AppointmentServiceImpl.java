@@ -8,7 +8,6 @@ import com.isaiahvaris.hospitalappointmentscheduler.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,28 +26,28 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public Appointment getAppointmentById(long id) {
+        return appointmentRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Appointment> getAllAppointmentsForStatus(String status) {
+        return appointmentRepository.findAllByStatus(status);
+    }
+
+    @Override
+    public List<Appointment> getAllPatientAppointmentsForStatus(Patient patient, String status) {
+        return appointmentRepository.findAllByPatientAndStatus(patient, status);
+    }
+
+    @Override
+    public List<Appointment> getAllDoctorAppointmentsForStatus(Doctor doctor, String status) {
+        return appointmentRepository.findAllByDoctorAndStatus(doctor, status);
+    }
+
+    @Override
     public Appointment cancelAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
-    }
-
-    @Override
-    public Appointment getAppointmentByPatientAndDate(Patient patient, Date date) {
-        return appointmentRepository.findByPatientAndAppointmentTime(patient, date);
-    }
-
-    @Override
-    public Appointment getAppointmentByDoctorAndDate(Doctor doctor, Date date) {
-        return appointmentRepository.findByDoctorAndAppointmentTime(doctor, date);
-    }
-
-    @Override
-    public List<Appointment> getAllPatientAppointments(Patient patient) {
-        return appointmentRepository.findAllByPatient(patient);
-    }
-
-    @Override
-    public List<Appointment> getAllDoctorAppointments(Doctor doctor) {
-        return appointmentRepository.findAllByDoctor(doctor);
     }
 
     @Override

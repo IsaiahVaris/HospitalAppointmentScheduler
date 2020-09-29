@@ -6,6 +6,8 @@ import com.isaiahvaris.hospitalappointmentscheduler.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
@@ -27,8 +29,13 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public List<Doctor> getAllDoctors() {
+        return (List<Doctor>) doctorRepository.findAll();
+    }
+
+    @Override
     public Doctor getDoctorByEmailandPassWord(String email, String password) {
-        return doctorRepository.findByEmailAndPassWord(email, password);
+        return doctorRepository.findByEmailAndPassword(email, password);
     }
 
     @Override

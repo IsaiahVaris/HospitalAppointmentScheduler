@@ -11,14 +11,12 @@ import java.util.List;
 @Service
 public interface AppointmentService {
     Appointment addAppointment(Appointment appointment);
-
-    Appointment getAppointmentByPatientAndDate(Patient patient, Date date);
-    Appointment getAppointmentByDoctorAndDate(Doctor doctor, Date date);
-
+    Appointment getAppointmentById(long id);
     Appointment updateAppointment(Appointment appointment);
 
-    List<Appointment> getAllPatientAppointments(Patient patient);
-    List<Appointment> getAllDoctorAppointments(Doctor doctor);
+    List<Appointment> getAllAppointmentsForStatus(String status);
+    List<Appointment> getAllPatientAppointmentsForStatus(Patient patient, String status);
+    List<Appointment> getAllDoctorAppointmentsForStatus(Doctor doctor, String status);
 
     Appointment cancelAppointment(Appointment appointment);
 

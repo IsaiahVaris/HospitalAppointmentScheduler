@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
+<nav>
+    <div class="nav-wrapper" style="background-color: darkblue">
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a th:href="@{/}" style="font-size: larger"><b>Home</b></a></li>
+                <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" style="margin-top: 5rem">
+    <h4>Welcome Admin</h4>
+    <hr />
+    <div th:if="${newregistration != null}">
+        <p th:text="${newregistration}" style="color: green"></p>
+    </div>
+
+    <div class="row">
+            <div class="row">
+                <a th:href="@{/register/doctor}" style="font-size: larger">
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Add New Doctor
+                        <i class="material-icons right"></i>
+                    </button>
+                </a>
+            </div>
+    </div>
+    <div class="row">
+        <a th:href="@{/admin/doctors}" style="font-size: larger">
+            <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">View all Doctors
+                <i class="material-icons right"></i>
+            </button>
+        </a>
+    </div>
+
+    <div class="row" th:if="${doctors != null}">
+        <h5>Doctors</h5>
+        <table>
+            <thead>
+            <th>Doctor Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            </thead>
+            <tbody>
+            <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.id}"></td>
+                <td th:text="${doctor.firstName}"></td>
+                <td th:text="${doctor.lastName}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

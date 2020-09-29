@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor | Profile</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body style="background: linear-gradient(to bottom right, #9CA6D9, #dbe2f4) no-repeat center center fixed">
+<nav>
+    <div class="nav-wrapper" style="background-color: darkblue">
+        <div class="container">
+            <a th:href="@{/}" class="brand-logo">D'Hospital Appointment Scheduler</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                <li><a th:href="@{/}" style="font-size: larger"><b>Home</b></a></li>
+
+                <li><a th:href="@{/login/logout}" style="font-size: larger"><b>Logout</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top: 5rem">
+    <h4 th:text="'Welcome to your profile, ' + ${user.firstName} + '!'"></h4>
+    <hr />
+    <div th:if="${update != null}">
+        <p th:text="${update}" style="color: green"></p>
+    </div>
+    <table>
+        <tbody>
+        <th></th>
+        <tr>
+            <td>First Name:</td>
+            <td th:text="${user.firstName}"></td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/firstName}" th:object="${user}">
+                    <div class="input-field col s6">
+                        <input placeholder="Edit First Name" id="firstname" type="text" class="validate" th:field="*{firstName}" required>
+                    </div>
+
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td th:text="${user.lastName}"></td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/lastName}" th:object="${user}">
+                    <div class="input-field col s6">
+                        <input placeholder="Last Name" id="lastname" type="text" class="validate" th:field="*{lastName}" required>
+                    </div>
+
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Date Of Birth:</td>
+            <td th:text="${user.birthDay}"></td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/dob}" th:object="${user}">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <b>Date of Birth:</b> <input type="date" th:field="*{birthDay}" id="birthDay" required></div>
+                    </div>
+
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td th:text="${user.gender}"></td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/gender}" th:object="${user}">
+                    <p>
+                        Gender:
+                        <label>
+                            <input class="with-gap" name="gender" type="radio" id="male" value="M" th:field="*{gender}"/>
+                            <span>Male</span>
+                        </label>
+                        <label>
+                            <input class="with-gap" name="gender" type="radio" id="female" value="F" th:field="*{gender}"/>
+                            <span>Female</span>
+                        </label>
+                    </p>
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Email Address:</td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/email}" th:object="${user}">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="email" type="email" class="validate" th:field="*{email}" required>
+                        </div>
+                    </div>
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>Update Password</td>
+            <td>
+                <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/profile/doctor/update/password}" th:object="${user}">
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate" th:field="*{password}" required>
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+
+                    <button class="btn waves-effect waves-light blue-violet accent-3" type="submit" name="action">Update
+                        <i class="material-icons right"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</body>
+</html>
