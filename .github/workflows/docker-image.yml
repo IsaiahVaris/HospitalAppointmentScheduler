@@ -30,7 +30,6 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag hospitalappointmentscheduler
 
-
 #  push_to_registry:
 #    name: Push Docker image to Docker Hub
 #    runs-on: ubuntu-latest
