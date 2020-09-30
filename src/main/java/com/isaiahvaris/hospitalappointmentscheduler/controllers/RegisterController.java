@@ -34,9 +34,9 @@ public class RegisterController {
 
     @GetMapping("/doctor")
     public String registerDoctor(Model model, HttpSession session) {
-        Object doctorObj = session.getAttribute("doctor");
-        if(doctorObj == null)
-            return "landing";
+//        Object doctorObj = session.getAttribute("doctor");
+//        if(doctorObj == null)
+//            return "landing";
 
         model.addAttribute("invalid", null);
         model.addAttribute("doctor", new Doctor());
@@ -62,9 +62,9 @@ public class RegisterController {
 
     @PostMapping("/doctor")
     public String signup(@Valid Doctor doctor, Model model, HttpSession session) {
-        Object doctorObj = session.getAttribute("doctor");
-        if(doctorObj == null)
-            return "landing";
+//        Object doctorObj = session.getAttribute("doctor");
+//        if(doctorObj == null)
+//            return "landing";
 
         Doctor gottenDoctor = doctorService.getDoctorByEmail(doctor.getEmail());
         if (gottenDoctor != null) {
@@ -76,7 +76,7 @@ public class RegisterController {
         doctorService.addDoctor(doctor);
         //successful registration message
         model.addAttribute("newregistration", "Registration successful!");
-        model.addAttribute("doctors", doctorService.getAllDoctors());
-        return "admin";
+//        model.addAttribute("doctors", doctorService.getAllDoctors());
+        return "doctorlogin";
     }
 }

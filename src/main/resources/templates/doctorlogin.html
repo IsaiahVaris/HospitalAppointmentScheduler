@@ -24,6 +24,9 @@
     <div th:if="${invalid != null}">
         <p style="color: tomato" th:text="${invalid}"></p>
     </div>
+    <div th:if="${newregistration != null}">
+        <p style="color: green" th:text="${newregistration}"></p>
+    </div>
     <hr />
     <div class="row">
         <form class="col s12" style="margin-top: 2rem" method="post" th:action="@{/login/doctor}" th:object="${doctor}">
@@ -45,6 +48,10 @@
             </button>
         </form>
     </div>
+</div>
+
+<div class="container">
+    <a th:href="@{/register/doctor}" style="text-decoration: underline">New Doctor? Register</a>
 </div>
 
 <!-- Compiled and minified JavaScript -->
