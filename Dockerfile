@@ -1,6 +1,6 @@
 FROM openjdk:11
 VOLUME /tmp
-EXPOSE 9090
+EXPOSE 8080
 
 ADD hospitalappointmentscheduler-0.0.1-SNAPSHOT.jar hospitalappointmentscheduler-0.0.1-SNAPSHOT.jar
 
