@@ -22,7 +22,4 @@ public abstract class User {
     private String password;
     private String gender;
     private Date birthDay;
-
-
-
 }
